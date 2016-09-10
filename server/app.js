@@ -33,6 +33,8 @@
 
   app.use(serveStatic('./bower_components/semantic/dist'));
 
+  app.use(serveStatic('./bower_components/jquery/dist'));
+
   app.use(serveStatic('./scripts'));
 
   app.use(serveStatic('./stylesheets'));
