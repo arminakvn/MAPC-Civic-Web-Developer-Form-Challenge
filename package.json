@@ -1,0 +1,33 @@
+{
+  "name": "mapc_web_form",
+  "version": "1.0.1",
+  "description": "MAPC web developer challange",
+  "repository": "https://github.com/arminakvn/MAPC-Civic-Web-Developer-Form-Challenge.git",
+  "private": true,
+  "scripts": {
+    "start": "node cluster.js",
+    "monitor": "nodemon server.js",
+    "deploy": "gcloud preview app deploy app.yaml"
+  },
+  "author": "Armin Akhavan armin.akhavan@gmail.com",
+  "license": "Apache Version 2.0",
+  "dependencies": {
+    "async": "latest",
+    "better-console": "^0.2.4",
+    "body-parser": "^1.14.2",
+    "cluster": "^0.7.7",
+    "daemon": "latest",
+    "del": "^2.2.2",
+    "express": "latest",
+    "optimist": "latest",
+    "pg": "^6.0.3",
+    "request": "latest",
+    "run-sequence": "^1.2.2",
+    "sequelize": "^3.23.6",
+    "serve-static": "latest",
+    "yamljs": "^0.2.8"
+  },
+  "engines": {
+    "node": "latest"
+  }
+}
