@@ -14,83 +14,87 @@
 	</head>
 
 <body>
-
+<div class="ui basic modal">
+    <div class="ui grid">
+      <form class="ui form">
+  <div class="field">
+    <label>First Name</label>
+    <input type="text" name="first-name" placeholder="First Name">
+  </div>
+  <div class="field">
+    <label>Last Name</label>
+    <input type="text" name="last-name" placeholder="Last Name">
+  </div>
+  <div class="field">
+    <div class="ui checkbox">
+      <input type="checkbox" tabindex="0" class="hidden">
+      <label>I agree to the Terms and Conditions</label>
+    </div>
+  </div>
+  <button class="ui button" type="submit">Submit</button>
+</form>
+    </div>
+</div>
 <div class="ui vertical segment">
     <div class="ui stackable left aligned page grid">
-        <h2>This is a web application made with node using expressjs and semantic-ui</h2>
         
       <div class="row">
         <div class="sixteen wide column">
-            <div class="ui segment">
-              
-              <p>There is possibiliyu to add angularjs, backbone and/or any other MVC.</p>
-              <p>The following libraries are now available to be used in the script.</p>
-              <ul>
-                <li>googlemapsapi</li>
-              </ul>
-            </div>
             <br>
 <!-- ********* -->
-            <div class="ui horizontal divider">or</div>
+            <!-- <div class="ui horizontal divider"></div> -->
               <form class="ui form segment">
-                <p>Tell Us About Yourself</p>
-                <div class="two fields">
-                  <div class="field">
-                    <label>Name</label>
-                    <input placeholder="First Name" name="name" type="text">
-                  </div>
-                  <div class="field">
-                    <label>Gender</label>
-                    <select class="ui dropdown" name="gender">
-                      <option value="">Gender</option>
-                      <option value="male">Male</option>
-                      <option value="female">Female</option>
-                    </select>
-                  </div>
-                </div>
-                <div class="two fields">
-                  <div class="field">
-                    <label>Username</label>
-                    <input placeholder="Username" name="username" type="text">
-                  </div>
-                  <div class="field">
-                    <label>Password</label>
-                    <input type="password" name="password">
-                  </div>
-                </div>
+                <h3>Start your free demo</h3>
                 <div class="field">
-                  <label>Skills</label>
-                  <select name="skills" multiple="" class="ui dropdown">
-                    <option value="">Select Skills</option>
-                    <option value="css">CSS</option>
-                    <option value="html">HTML</option>
-                    <option value="javascript">Javascript</option>
-                    <option value="design">Graphic Design</option>
-                    <option value="plumbing">Plumbing</option>
-                    <option value="mech">Mechanical Engineering</option>
-                    <option value="repair">Kitchen Repair</option>
-                  </select>
-                </div>
-                <div class="inline field">
-                  <div class="ui checkbox">
-                    <input type="checkbox" name="terms">
-                    <label>I agree to the terms and conditions</label>
+                <label>Name</label>
+                <div class="two fields">
+                  <div class="field">
+                    <input type="text" name="first_name" placeholder="First Name">
+                  </div>
+                  <div class="field">
+                    <input type="text" name="last_name" placeholder="Last Name">
                   </div>
                 </div>
-                <div class="ui primary submit button">Submit</div>
+              </div>
+              <h5 class="ui dividing header">Account</h5>
+                <div class="two fields">
+                  <div class="ten wide field">
+                    <label></label>
+                    <input placeholder="Email" name="email" type="email">
+                  </div>
+                  <div class="six wide field">
+                    <label></label>
+                    <input placeholder="Password (Hidden)" type="password" name="password">
+                  </div>
+                </div>
+
+                <h5 class="ui dividing header">Project information</h5>
+                <div class="two fields">
+                  <div class="field">
+                    <label></label>
+                    <input placeholder="Project Name" name="project_name" type="text">
+                  </div>
+                  <div class="field">
+                    <label></label>
+                    <input placeholder="Organization Name" type="text" name="organization_name">
+                  </div>
+                </div>
+
+
+                <div class="ui primary submit button">Start Your Demo</div>
                 <div class="ui error message"></div>
               </form>
-            <div class="ui horizontal divider"></div>
+            <!-- <div class="ui horizontal divider"></div> -->
             
 
 
 <!--            <div id="content"></div>-->
-          <div class="column">
+          <!-- <div class="column">
             </div>
             <div class="column">
 
-          </div>
-          <div class="ui horizontal divider"></div>
+          </div> -->
+          <!-- <div class="ui horizontal divider"></div> -->
 
         </div>
       </div>

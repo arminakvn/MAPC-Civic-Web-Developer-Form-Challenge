@@ -21,6 +21,7 @@
     "express": "latest",
     "optimist": "latest",
     "pg": "^6.0.3",
+    "redis": "^2.6.2",
     "request": "latest",
     "run-sequence": "^1.2.2",
     "sequelize": "^3.23.6",

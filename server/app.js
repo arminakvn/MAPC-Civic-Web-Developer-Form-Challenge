@@ -2,7 +2,7 @@
 (function() {
   var path;
   'use strict';
-  var Sequelize, app, async, express, http, path, request, sequelize, serveStatic;
+  var Sequelize, app, async, client, express, http, path, redis, redisHOST, request, sequelize, serveStatic;
 
   express = require('express');
 
@@ -16,7 +16,17 @@
 
   async = require('async');
 
+  redis = require('redis');
+
   serveStatic = require('serve-static');
+
+  redisHOST = 'redis';
+
+  client = redis.createClient('6379', redisHOST);
+
+  client.on('error', function(err) {
+    console.log('Error ' + err);
+  });
 
   Sequelize = require('sequelize');
 
@@ -51,16 +61,19 @@
     });
   });
 
-  app.get('/grids/:msa', function(req, res) {
-    sequelize.query('SELECT * FROM grid WHERE msa = :msa ', {
-      replacements: {
-        msa: "" + req.params.msa
-      },
-      type: sequelize.QueryTypes.SELECT
-    }).then(function(object) {
-      res.json(object);
+  app.get('/forminputemail/:email', function(req, res) {
+    console.log(req.params.email);
+    client.sadd(['emails', req.params.email], function(err, reply) {
+      if (reply === 1) {
+        res.json({
+          'status': 1
+        });
+      } else {
+        res.json({
+          'status': 0
+        });
+      }
     });
-    return;
   });
 
   app.get('/cities', function(req, res) {

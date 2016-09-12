@@ -8,16 +8,16 @@ path = require 'path'
 http = require 'http'
 path = require 'path'
 async = require 'async'
-# redis = require 'redis'
+redis = require 'redis'
 # MongoClient = require('mongodb').MongoClient
 serveStatic = require 'serve-static'
 
-# redisHOST = 'redis'
+redisHOST = 'redis'
 
-# client = redis.createClient('6379', redisHOST)
-# client.on 'error', (err) ->
-#   console.log 'Error ' + err
-#   return
+client = redis.createClient('6379', redisHOST)
+client.on 'error', (err) ->
+  console.log 'Error ' + err
+  return
 
 # client.hgetall 'cityCentroids', (err, object) ->
 #   console.log object
@@ -80,13 +80,19 @@ app.get '/', (req, res) ->
   return
 
 
-app.get '/grids/:msa', (req, res) ->
-  sequelize.query('SELECT * FROM grid WHERE msa = :msa ',
-    replacements: msa: "#{req.params.msa}"
-    type: sequelize.QueryTypes.SELECT).then (object) ->
-      res.json object
+app.get '/forminputemail/:email', (req, res) ->
+  console.log req.params.email
+  client.sadd [
+    'emails'
+    req.params.email
+  ], (err, reply) ->
+    if reply == 1
+      res.json {'status': 1}
       return
-    return
+    else
+      res.json {'status': 0}
+      return
+    # 3
   return
 
 app.get '/cities', (req, res) ->
