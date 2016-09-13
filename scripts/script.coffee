@@ -41,20 +41,31 @@ validationRules = fields:
         prompt: 'Your password must be at least {ruleValue} characters'
       }
     ]
-getFieldValue = (fieldId) ->
-  $('.ui.form').form('get field', fieldId).val()
-
-onFormSubmitted = (response) ->
-  console.log "response in client", response
-  return
-
-submitForm = ->
-  formData = email: getFieldValue('email')
-  console.log "formData", formData
-  $.ajax
-    type: 'GET'
-    url: '/forminputemail/#{formData.email}'
-    success: onFormSubmitted
-  return
-
-$('.ui.form').form validationRules, onSuccess: submitForm
+$('.ui.form').form validationRules,
+  inline: true
+  on: 'blur'
+  transition: 'fade down'
+$('.ui.form').submit (e) ->
+  false
+$('.ui.form .submit.button').api(
+  method: 'GET'
+  serializeForm: true
+  data: $('.ui.form').form('get values')
+  beforeSend: (settings) =>
+    $form = $('.ui.form')
+    email = $form.form('get value', 'email')
+    if $(".ui.form").form('is valid')[1] is true
+      settings.url = "/forminputemail/#{email}"
+      return settings
+    else
+      settings.url = "/"
+      return settings
+  onSuccess: (data) ->
+    valid = $(".ui.form").form('is valid')
+    $('.ui.form').submit (e) ->
+      true
+    if data.status == 0 and valid[1] is true
+       $('#signinprompt').modal('setting', 'transition', 'fade').modal('show')
+    else 
+        $('#confirmationpage').modal('setting', 'transition', 'fade').modal('show')
+  )

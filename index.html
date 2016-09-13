@@ -4,35 +4,54 @@
   <meta charset="UTF-8">
 	<title>MAPC web developer challange</title>
 	<link rel="stylesheet" type="text/css" href="semantic.css">
-
-<link href='https://fonts.googleapis.com/css?family=Dosis:500,300|Ropa+Sans' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" type="text/css" href="grid.css">
   <script src="jquery.js"></script>
   <script src="semantic.js"></script>
-
-    
-
 	</head>
 
 <body>
-<div class="ui basic modal">
+  <div class="ui basic modal" id="confirmationpage">
+    <div class="ui horizontal divider"></div>
     <div class="ui grid">
-      <form class="ui form">
-  <div class="field">
-    <label>First Name</label>
-    <input type="text" name="first-name" placeholder="First Name">
-  </div>
-  <div class="field">
-    <label>Last Name</label>
-    <input type="text" name="last-name" placeholder="Last Name">
-  </div>
-  <div class="field">
-    <div class="ui checkbox">
-      <input type="checkbox" tabindex="0" class="hidden">
-      <label>I agree to the Terms and Conditions</label>
+      <div class="two columns wide row">
+      <h1 class="ui massive header" style="color: white;">This is a <span style="font-weight: normal; color: white;">confirmation page</span></h1>
+      </div>
+      <div class="two columns wide row">
+      <h1 class="ui massive header" style="color: white;">Expect to hear from us <span style="font-weight: normal; color: white;">in the next business day</span></h1>
+      </div>
     </div>
   </div>
-  <button class="ui button" type="submit">Submit</button>
+<div class="ui basic modal" id="signinprompt">
+  
+  <div class="ui horizontal divider"></div>
+  </hr>
+    <div class="ui grid">
+      <div class="six columns wide row">
+      <div "one wide column"></div>
+        <div "five wide column">
+<h1 class="ui massive header" style="color: white;">This email address already exists in the system<span style="font-weight: normal; color: white;">please sign in</span></h1>
+        </div>
+
+</div>
+
+      <div class="six columns wide row">
+        <div "one wide column"></div>
+        <div "five wide column">
+            <form class="ui form">
+      <div class="field">
+        <input type="text" name="email" placeholder="Email">
+      </div>
+      <div class="field">
+        <label></label>
+        <input placeholder="Password (Hidden)" type="password" name="password">
+      </div>
+      <div class="field">
+      </div>
+  <button class="ui button" type="submit" href="#">Sign in</button>
 </form>
+        </div>
+        </div>
+      
     </div>
 </div>
 <div class="ui vertical segment">
@@ -41,8 +60,6 @@
       <div class="row">
         <div class="sixteen wide column">
             <br>
-<!-- ********* -->
-            <!-- <div class="ui horizontal divider"></div> -->
               <form class="ui form segment">
                 <h3>Start your free demo</h3>
                 <div class="field">
@@ -67,7 +84,6 @@
                     <input placeholder="Password (Hidden)" type="password" name="password">
                   </div>
                 </div>
-
                 <h5 class="ui dividing header">Project information</h5>
                 <div class="two fields">
                   <div class="field">
@@ -79,27 +95,14 @@
                     <input placeholder="Organization Name" type="text" name="organization_name">
                   </div>
                 </div>
-
-
                 <div class="ui primary submit button">Start Your Demo</div>
                 <div class="ui error message"></div>
               </form>
-            <!-- <div class="ui horizontal divider"></div> -->
-            
-
-
-<!--            <div id="content"></div>-->
-          <!-- <div class="column">
-            </div>
-            <div class="column">
-
-          </div> -->
-          <!-- <div class="ui horizontal divider"></div> -->
-
         </div>
       </div>
     </div>
-  </div><script src="script.js"></script>
+  </div>
+  <script src="script.js"></script>
   </body>
   
 </html>

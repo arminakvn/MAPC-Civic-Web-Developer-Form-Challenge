@@ -2,7 +2,7 @@
 (function() {
   var path;
   'use strict';
-  var Sequelize, app, async, client, express, http, path, redis, redisHOST, request, sequelize, serveStatic;
+  var app, async, client, express, http, path, redis, redisHOST, request, serveStatic;
 
   express = require('express');
 
@@ -25,14 +25,7 @@
   client = redis.createClient('6379', redisHOST);
 
   client.on('error', function(err) {
-    console.log('Error ' + err);
-  });
-
-  Sequelize = require('sequelize');
-
-  sequelize = new Sequelize('atlasdb', 'postgres', '', {
-    host: 'postgresql',
-    dialect: 'postgres'
+    console.log('Error in connecting to redis database' + err);
   });
 
   app = express();
@@ -62,7 +55,6 @@
   });
 
   app.get('/forminputemail/:email', function(req, res) {
-    console.log(req.params.email);
     client.sadd(['emails', req.params.email], function(err, reply) {
       if (reply === 1) {
         res.json({
@@ -75,55 +67,6 @@
       }
     });
   });
-
-  app.get('/cities', function(req, res) {
-    sequelize.query('SELECT * FROM city', {
-      type: sequelize.QueryTypes.SELECT
-    }).then(function(object) {
-      res.json(object);
-    });
-  });
-
-  app.get('/groups_data', function(req, res) {
-    sequelize.query('SELECT * FROM group_data', {
-      type: sequelize.QueryTypes.SELECT
-    }).then(function(object) {
-      res.json(object);
-    });
-  });
-
-  app.get('/city_comparisons_all', function(req, res) {
-    sequelize.query('SELECT * FROM city_comparison', {
-      type: sequelize.QueryTypes.SELECT
-    }).then(function(object) {
-      res.json(object);
-    });
-  });
-
-  app.get('/cityComparisonsData', function(req, res) {
-    client.hgetall("city_comparison_data", function(err, object) {
-      res.json(object);
-    });
-  });
-
-  app.get('/us_json', function(req, res) {
-    sequelize.query('SELECT * FROM us_json', {
-      type: sequelize.QueryTypes.SELECT
-    }).then(function(object) {
-      res.json(object);
-    });
-  });
-
-  app.get('/zipcode_business_geojson/:msa', function(req, res) {
-    sequelize.query('SELECT * FROM zipcode_business', {
-      type: sequelize.QueryTypes.SELECT
-    }).then(function(object) {
-      res.json(object);
-    });
-  });
-
-
-  /* Start the server */
 
   module.exports = {
     app: app,

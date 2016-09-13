@@ -7,27 +7,16 @@ services:
     ports:
       - "6379:6379"
     command: redis-server --appendonly yes
-  postgresql:
-    build: ./postgresql/.
-    volumes:
-      - ./postgresql:/var/lib/postgresql
-    ports:
-      - "5432:5432"
-    expose:
-      - "5432"
   web:
     restart: always
     build: .
     depends_on:
       - redis
     volumes:
-      # - ./services:/usr/src/app/services
-      # - ./stylesheets:/usr/src/app/stylesheets
-      # - ./server:/usr/src/app/server/
       - ./scripts:/usr/src/scripts
       - ./index.html:/usr/src/app/index.html
     links:
-      - postgresql:postgresql
+      - redis:redis
     ports:
       - "8080:8080"
     env_file: .env

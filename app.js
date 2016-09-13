@@ -2,7 +2,7 @@
 (function() {
   var path;
   'use strict';
-  var Sequelize, app, async, express, http, path, request, sequelize, serveStatic;
+  var app, async, client, express, http, path, redis, redisHOST, request, serveStatic;
 
   express = require('express');
 
@@ -16,13 +16,16 @@
 
   async = require('async');
 
+  redis = require('redis');
+
   serveStatic = require('serve-static');
 
-  Sequelize = require('sequelize');
+  redisHOST = 'redis';
 
-  sequelize = new Sequelize('atlasdb', 'postgres', '', {
-    host: 'postgresql',
-    dialect: 'postgres'
+  client = redis.createClient('6379', redisHOST);
+
+  client.on('error', function(err) {
+    console.log('Error in connecting to redis database' + err);
   });
 
   app = express();
@@ -31,29 +34,11 @@
 
   app.set('trust proxy', true);
 
+  app.use(serveStatic('./bower_components/semantic/dist'));
+
   app.use(serveStatic('./bower_components/jquery/dist'));
 
-  app.use(serveStatic('./node_modules/bootstrap/dist/js'));
-
-  app.use(serveStatic('./node_modules/bootstrap/dist/css'));
-
-  app.use(serveStatic('./bower_components/d3'));
-
-  app.use(serveStatic('./bower_components/leaflet/dist'));
-
-  app.use(serveStatic('./bower_components/d3-queue/'));
-
-  app.use(serveStatic('./node_modules/topojson/build'));
-
-  app.use(serveStatic('./bower_components/mapbox.js/'));
-
-  app.use(serveStatic('./node_modules/d3-tip'));
-
-  app.use(serveStatic('./node_modules/mapbox-gl/dist'));
-
-  app.use(serveStatic('./node_modules/crossfilter'));
-
-  app.use(serveStatic('./font-awesome'));
+  app.use(serveStatic('./scripts'));
 
   app.use(serveStatic('./stylesheets'));
 
@@ -69,66 +54,19 @@
     });
   });
 
-  app.get('/grids/:msa', function(req, res) {
-    sequelize.query('SELECT * FROM grid WHERE msa = :msa ', {
-      replacements: {
-        msa: "" + req.params.msa
-      },
-      type: sequelize.QueryTypes.SELECT
-    }).then(function(object) {
-      res.json(object);
-    });
-    return;
-  });
-
-  app.get('/cities', function(req, res) {
-    sequelize.query('SELECT * FROM city', {
-      type: sequelize.QueryTypes.SELECT
-    }).then(function(object) {
-      res.json(object);
+  app.get('/forminputemail/:email', function(req, res) {
+    client.sadd(['emails', req.params.email], function(err, reply) {
+      if (reply === 1) {
+        res.json({
+          'status': 1
+        });
+      } else {
+        res.json({
+          'status': 0
+        });
+      }
     });
   });
-
-  app.get('/groups_data', function(req, res) {
-    sequelize.query('SELECT * FROM group_data', {
-      type: sequelize.QueryTypes.SELECT
-    }).then(function(object) {
-      res.json(object);
-    });
-  });
-
-  app.get('/city_comparisons_all', function(req, res) {
-    sequelize.query('SELECT * FROM city_comparison', {
-      type: sequelize.QueryTypes.SELECT
-    }).then(function(object) {
-      res.json(object);
-    });
-  });
-
-  app.get('/cityComparisonsData', function(req, res) {
-    client.hgetall("city_comparison_data", function(err, object) {
-      res.json(object);
-    });
-  });
-
-  app.get('/us_json', function(req, res) {
-    sequelize.query('SELECT * FROM us_json', {
-      type: sequelize.QueryTypes.SELECT
-    }).then(function(object) {
-      res.json(object);
-    });
-  });
-
-  app.get('/zipcode_business_geojson/:msa', function(req, res) {
-    sequelize.query('SELECT * FROM zipcode_business', {
-      type: sequelize.QueryTypes.SELECT
-    }).then(function(object) {
-      res.json(object);
-    });
-  });
-
-
-  /* Start the server */
 
   module.exports = {
     app: app,
