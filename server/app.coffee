@@ -38,7 +38,6 @@ app.get '/', (req, res) ->
 
 
 app.get '/forminputemail/:email', (req, res) ->
-  console.log req.params.email
   client.sadd [
     'emails'
     req.params.email

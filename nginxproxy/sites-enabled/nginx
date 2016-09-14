@@ -5,6 +5,9 @@ server {
     location ~* \.(eot|otf|ttf|woff|woff2)$ {
         add_header Access-Control-Allow-Origin *;
     }
+    location /fonts {
+        alias /usr/src/app/stylesheets/fonts;
+    }
     location / {
         proxy_pass http://web:8080;
         proxy_set_header Host $host;

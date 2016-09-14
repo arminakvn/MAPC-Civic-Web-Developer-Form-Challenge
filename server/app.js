@@ -57,7 +57,6 @@
   });
 
   app.get('/forminputemail/:email', function(req, res) {
-    console.log(req.params.email);
     client.sadd(['emails', req.params.email], function(err, reply) {
       return res.json({
         'status': reply

@@ -55,17 +55,10 @@ $('.ui.form .submit.button').api(
       false
     $form = $('.ui.form')
     email = $form.form('get value', 'email')
-    console.log "email",email ,$form
-    # if $(".ui.form").form('is valid')[1] is true
     settings.url = "/forminputemail/#{email}"
     return settings
-    # else
-    #   settings.url = "/"
-    #   return settings
   onSuccess: (data) ->
-    console.log "data", data
     valid = $(".ui.form").form('is valid')
-    console.log "valid", valid
     $('.ui.form').submit (e) ->
       true
     if data.status == 0 and valid is true

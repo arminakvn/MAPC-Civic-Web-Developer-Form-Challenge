@@ -82,16 +82,13 @@
         });
         $form = $('.ui.form');
         email = $form.form('get value', 'email');
-        console.log("email", email, $form);
         settings.url = "/forminputemail/" + email;
         return settings;
       };
     })(this),
     onSuccess: function(data) {
       var valid;
-      console.log("data", data);
       valid = $(".ui.form").form('is valid');
-      console.log("valid", valid);
       $('.ui.form').submit(function(e) {
         return true;
       });
