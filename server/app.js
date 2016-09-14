@@ -48,6 +48,8 @@
     'index': ['index.html', 'index.htm']
   }));
 
+  app.set('view engine', 'ejs');
+
   app.get('/', function(req, res) {
     res.render('index', function(err, html) {
       res.send(html);
@@ -55,16 +57,11 @@
   });
 
   app.get('/forminputemail/:email', function(req, res) {
+    console.log(req.params.email);
     client.sadd(['emails', req.params.email], function(err, reply) {
-      if (reply === 1) {
-        res.json({
-          'status': 1
-        });
-      } else {
-        res.json({
-          'status': 0
-        });
-      }
+      return res.json({
+        'status': reply
+      });
     });
   });
 

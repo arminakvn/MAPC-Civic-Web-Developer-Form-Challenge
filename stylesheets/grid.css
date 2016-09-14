@@ -196,3 +196,14 @@ h2{
     font-family: "CartoGothicStd", sans-serif;  font-weight: 700;  font-size: 22px;
 
 }
+
+.field {
+  padding-block-start: 10px;
+}
+.ui.vertical.segment {
+  border-bottom: 0px solid rgba(34, 36, 38, 0.15);
+}
+#footnote {
+  font-size: 10px;
+    font-style: italic;
+}

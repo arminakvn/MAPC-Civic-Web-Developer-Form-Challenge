@@ -10,56 +10,68 @@
 	</head>
 
 <body>
+
+  <!-- two predefined modals for the two possible conditions of the challenge for prompting to user on submit -->
+
   <div class="ui basic modal" id="confirmationpage">
-    <div class="ui horizontal divider"></div>
-    <div class="ui grid">
-      <div class="two columns wide row">
-      <h1 class="ui massive header" style="color: white;">This is a <span style="font-weight: normal; color: white;">confirmation page</span></h1>
-      </div>
-      <div class="two columns wide row">
-      <h1 class="ui massive header" style="color: white;">Expect to hear from us <span style="font-weight: normal; color: white;">in the next business day</span></h1>
-      </div>
-    </div>
-  </div>
-<div class="ui basic modal" id="signinprompt">
-  
-  <div class="ui horizontal divider"></div>
-  </hr>
-    <div class="ui grid">
-      <div class="six columns wide row">
-      <div "one wide column"></div>
-        <div "five wide column">
-<h1 class="ui massive header" style="color: white;">This email address already exists in the system<span style="font-weight: normal; color: white;">please sign in</span></h1>
-        </div>
-
-</div>
-
-      <div class="six columns wide row">
-        <div "one wide column"></div>
-        <div "five wide column">
-            <form class="ui form">
-      <div class="field">
-        <input type="text" name="email" placeholder="Email">
-      </div>
-      <div class="field">
-        <label></label>
-        <input placeholder="Password (Hidden)" type="password" name="password">
-      </div>
-      <div class="field">
-      </div>
-  <button class="ui button" type="submit" href="#">Sign in</button>
-</form>
-        </div>
-        </div>
-      
-    </div>
-</div>
-<div class="ui vertical segment">
+    <div class="ui vertical segment">
     <div class="ui stackable left aligned page grid">
-        
       <div class="row">
         <div class="sixteen wide column">
             <br>
+              <h1>We recorded your information</h1>
+              <p>We will be contacting you in the next few days regarding this demo.
+              </p>
+              <p>Please contact armin.akhavan@gmail.com if any questions.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="ui basic modal" id="signinprompt">
+  <div class="ui horizontal divider"></div>
+  </hr>
+ <div class="ui vertical segment">
+    <div class="ui stackable left aligned page grid">
+    <div class="row">
+      <div class="sixteen wide column">
+        <h1>This email address already exists in the system</h1>
+        <p>Sign in from <a href="#">here</a>.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<div class="ui vertical segment">
+    <div class="ui two column doubling grid container">
+
+      <!-- possible to put some header/navigation tab here, however this is now for creating a space in the beggening of document, easing the viewers entering the page'  -->
+
+      <div class="sixteen column wide row"></div>
+
+      <!-- page content -->
+
+      <div class="row">
+        <div class="four wide column">
+
+          <!-- It is suggested that/to leave some empty space on the top-left of documents for easing the reader when entering the page -->
+
+
+          <div class="four column wide row"></div>
+
+
+          <!-- some information about the service -->
+
+          <h1>MAPC's free demo request</h1>
+          <p>This is a Node application implementing a simple form with Expressjs, semantic-ui, and Redis for <strong>MAPC web developer's technical challenge</strong>.</p>
+          <p>The code used in this project is available on Github <a href="https://github.com/arminakvn/MAPC-Civic-Web-Developer-Form-Challenge">here</a>. </p>
+          <p> by <strong>Armin Akhavan</strong> | arminakhavan.co | @arminakvn | armin.akhavan@gmail.com</p>
+
+        </div>
+        
+        <div class="twelve wide column">
+            
               <form class="ui form segment">
                 <h3>Start your free demo</h3>
                 <div class="field">
@@ -95,7 +107,8 @@
                     <input placeholder="Organization Name" type="text" name="organization_name">
                   </div>
                 </div>
-                <div class="ui primary submit button">Start Your Demo</div>
+                <br>
+                <div class="ui fluid submit button">Start</div>
                 <div class="ui error message"></div>
               </form>
         </div>
@@ -104,5 +117,4 @@
   </div>
   <script src="script.js"></script>
   </body>
-  
 </html>

@@ -45,27 +45,32 @@ $('.ui.form').form validationRules,
   inline: true
   on: 'blur'
   transition: 'fade down'
-$('.ui.form').submit (e) ->
-  false
+
 $('.ui.form .submit.button').api(
   method: 'GET'
   serializeForm: true
   data: $('.ui.form').form('get values')
   beforeSend: (settings) =>
+    $('.ui.form').submit (e) ->
+      false
     $form = $('.ui.form')
     email = $form.form('get value', 'email')
-    if $(".ui.form").form('is valid')[1] is true
-      settings.url = "/forminputemail/#{email}"
-      return settings
-    else
-      settings.url = "/"
-      return settings
+    console.log "email",email ,$form
+    # if $(".ui.form").form('is valid')[1] is true
+    settings.url = "/forminputemail/#{email}"
+    return settings
+    # else
+    #   settings.url = "/"
+    #   return settings
   onSuccess: (data) ->
+    console.log "data", data
     valid = $(".ui.form").form('is valid')
+    console.log "valid", valid
     $('.ui.form').submit (e) ->
       true
-    if data.status == 0 and valid[1] is true
+    if data.status == 0 and valid is true
        $('#signinprompt').modal('setting', 'transition', 'fade').modal('show')
-    else 
+    else if data.status == 1 and valid is true
+      # window.location.pathname = "confirm/confirm.html"
         $('#confirmationpage').modal('setting', 'transition', 'fade').modal('show')
   )

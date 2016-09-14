@@ -70,10 +70,6 @@
     transition: 'fade down'
   });
 
-  $('.ui.form').submit(function(e) {
-    return false;
-  });
-
   $('.ui.form .submit.button').api({
     method: 'GET',
     serializeForm: true,
@@ -81,26 +77,27 @@
     beforeSend: (function(_this) {
       return function(settings) {
         var $form, email;
+        $('.ui.form').submit(function(e) {
+          return false;
+        });
         $form = $('.ui.form');
         email = $form.form('get value', 'email');
-        if ($(".ui.form").form('is valid')[1] === true) {
-          settings.url = "/forminputemail/" + email;
-          return settings;
-        } else {
-          settings.url = "/";
-          return settings;
-        }
+        console.log("email", email, $form);
+        settings.url = "/forminputemail/" + email;
+        return settings;
       };
     })(this),
     onSuccess: function(data) {
       var valid;
+      console.log("data", data);
       valid = $(".ui.form").form('is valid');
+      console.log("valid", valid);
       $('.ui.form').submit(function(e) {
         return true;
       });
-      if (data.status === 0 && valid[1] === true) {
+      if (data.status === 0 && valid === true) {
         return $('#signinprompt').modal('setting', 'transition', 'fade').modal('show');
-      } else {
+      } else if (data.status === 1 && valid === true) {
         return $('#confirmationpage').modal('setting', 'transition', 'fade').modal('show');
       }
     }

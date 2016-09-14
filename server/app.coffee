@@ -29,7 +29,7 @@ app.use serveStatic('./', 'index': [
   'index.html'
   'index.htm'
 ])
-
+app.set 'view engine', 'ejs'
 app.get '/', (req, res) ->
   res.render 'index', (err, html) ->
     res.send html
@@ -38,16 +38,12 @@ app.get '/', (req, res) ->
 
 
 app.get '/forminputemail/:email', (req, res) ->
+  console.log req.params.email
   client.sadd [
     'emails'
     req.params.email
   ], (err, reply) ->
-    if reply == 1
-      res.json {'status': 1}
-      return
-    else
-      res.json {'status': 0}
-      return
+    res.json {'status': reply}
     # 3
   return
 

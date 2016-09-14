@@ -1,0 +1,20 @@
+nginx:
+  image: 'arminakvn/mapcch:nginx'
+  links:
+    - web
+  ports:
+    - '80:80'
+  volumes_from:
+    - web
+redis:
+  command: redis-server --appendonly yes
+  image: 'arminakvn/mapcch:redis'
+  ports:
+    - '6379:6379'
+web:
+  image: 'arminakvn/mapcch:web'
+  links:
+    - redis
+  ports:
+    - '8080:8080'
+  restart: always

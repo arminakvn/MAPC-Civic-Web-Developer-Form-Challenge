@@ -15,11 +15,11 @@ services:
     volumes:
       - ./scripts:/usr/src/scripts
       - ./index.html:/usr/src/app/index.html
+      - ./confirm.html:/usr/src/app/confirm.html
     links:
       - redis:redis
     ports:
       - "8080:8080"
-    env_file: .env
   nginxproxy:
     restart: always
     build: ./nginxproxy/
